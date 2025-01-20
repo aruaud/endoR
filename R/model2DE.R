@@ -57,7 +57,7 @@ model2DE <- function(model, model_type, data, target,
 
 
   # define classPos if it has not been passed
-  if (is.character(target) && is.null(classPos) == TRUE) {
+  if (!is.numeric(target) && is.null(classPos) == TRUE) {
     classPos <- names(which.max(table(target)))
     cat("Positive class:", classPos, "\n")
   }

@@ -34,6 +34,9 @@ preCluster <- function(model, model_type, data, target,
 
   #### Create the data partition
   if (length(sample_weight) == 2) {
+    if (is.null(classPos)) {
+      stop("classPos must be provided when using sample_weight = c(classPos weight, other classes weight).")
+    }
     sample_weight <- ifelse(target == classPos, sample_weight[1], sample_weight[2])
   } else if (is.null(sample_weight)) {
     sample_weight <- rep(1, length(target))
