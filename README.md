@@ -33,8 +33,10 @@ Before: select and fit a machine learning model (regression or classification)
 3. Plot results with `plotFeatures()` and `plotNetwork()` (created with ggplot2, ggraph and igraph R-packages, arranged with the ggpubr R-package)
 
 Some common issues: 
-- if the installation doesn't work, you may need to install R version 4.0.3 and use the inTrees R-package version 1.3 
+- If the installation doesn't work, you may need to install R version 4.0.3 and use the inTrees R-package version 1.3 
 - endoR uses text patterns: make sure to remove all special characters from your column names before using endoR, `colnames(data) <- compatibleNames(colnames(data))`
+- Sometimes it fails if the `data.table` and `inTrees` packages are not explicitely imported
+- When using the `caret` package for model training, be sure to feed the caret-modified training data to endoR: `data_caret <- model.matrix(target ~ ., data = data)`. Caret perform dummification of multiclass variables before training, which creates 1 variable per level of the original factor. The trees are then fitted on these 0-1 encoded variables and endoR needs to know to read it properly ;)
 
 
 # Background
